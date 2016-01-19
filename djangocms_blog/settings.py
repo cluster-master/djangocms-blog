@@ -110,6 +110,17 @@ def get_setting(name):
         'BLOG_ENABLE_THROUGH_TOOLBAR_MENU': getattr(
             settings, 'BLOG_ENABLE_THROUGH_TOOLBAR_MENU', False),
 
+        'BLOG_CATEGORY_BASE_MODEL': getattr(
+            settings,
+            'BLOG_CATEGORY_BASE_MODEL',
+            'djangocms_blog.models_abstract.blog.AbstractBlogCategory'
+        ),
+        'BLOG_POST_BASE_MODEL': getattr(
+            settings,
+            'BLOG_POST_BASE_MODEL',
+            'djangocms_blog.models_abstract.blog.AbstractPost'
+        ),
+
         'BLOG_PLUGIN_MODULE_NAME': getattr(settings, 'BLOG_PLUGIN_MODULE_NAME', _('Blog')),
         'BLOG_LATEST_ENTRIES_PLUGIN_NAME': getattr(
             settings, 'BLOG_LATEST_ENTRIES_PLUGIN_NAME', _('Latest Blog Articles')),

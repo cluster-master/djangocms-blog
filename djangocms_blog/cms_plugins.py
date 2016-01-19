@@ -6,9 +6,11 @@ import os.path
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from .forms import LatestEntriesForm
-from .models import AuthorEntriesPlugin, BlogCategory, GenericBlogPlugin, LatestPostsPlugin, Post
-from .settings import get_setting
+from djangocms_blog.forms import LatestEntriesForm
+from djangocms_blog.models import (
+    AuthorEntriesPlugin, BlogCategory, GenericBlogPlugin, LatestPostsPlugin, Post,
+)
+from djangocms_blog.settings import get_setting
 
 
 class BlogPlugin(CMSPluginBase):
