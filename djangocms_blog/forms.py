@@ -6,7 +6,8 @@ from django.conf import settings
 from parler.forms import TranslatableModelForm
 from taggit_autosuggest.widgets import TagAutoSuggest
 
-from .models import BlogCategory, BlogConfig, Post
+from djangocms_blog.cms_appconfig import BlogConfig
+from djangocms_blog.models import BlogCategory, Post
 
 
 class LatestEntriesForm(forms.ModelForm):

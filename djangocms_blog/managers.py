@@ -16,7 +16,6 @@ except ImportError:
 
 
 class TaggedFilterItem(object):
-
     def tagged(self, other_model=None, queryset=None):
         """
         Restituisce una queryset di elementi del model taggati,
@@ -68,10 +67,10 @@ class TaggedFilterItem(object):
             kwargs = TaggedItem.bulk_lookup_kwargs(self.model.objects.published())
         kwargs['tag_id__in'] = tag_ids
         counted_tags = dict(TaggedItem.objects
-                                      .filter(**kwargs)
-                                      .values('tag')
-                                      .annotate(count=models.Count('tag'))
-                                      .values_list('tag', 'count'))
+                            .filter(**kwargs)
+                            .values('tag')
+                            .annotate(count=models.Count('tag'))
+                            .values_list('tag', 'count'))
         tags = TaggedItem.tag_model().objects.filter(pk__in=counted_tags.keys())
         for tag in tags:
             tag.count = counted_tags[tag.pk]
@@ -99,8 +98,8 @@ class GenericDateQuerySet(AppHookConfigTranslatableQueryset):
         queryset = self.on_site()
         if self.end_date_field:
             qfilter = (
-                models.Q(**{'%s__gte' % self.end_date_field: now()})
-                | models.Q(**{'%s__isnull' % self.end_date_field: True})
+                models.Q(**{'%s__gte' % self.end_date_field: now()}) |
+                models.Q(**{'%s__isnull' % self.end_date_field: True})
             )
             queryset = queryset.filter(qfilter)
         return queryset.filter(**{self.publish_field: True})
@@ -109,8 +108,8 @@ class GenericDateQuerySet(AppHookConfigTranslatableQueryset):
         queryset = self.on_site()
         if self.end_date_field:
             qfilter = (
-                models.Q(**{'%s__lte' % self.end_date_field: now()})
-                | models.Q(**{'%s__isnull' % self.end_date_field: False})
+                models.Q(**{'%s__lte' % self.end_date_field: now()}) |
+                models.Q(**{'%s__isnull' % self.end_date_field: False})
             )
             queryset = queryset.filter(qfilter)
         return queryset.filter(**{self.publish_field: True})
@@ -132,6 +131,7 @@ class GenericDateTaggedManager(TaggedFilterItem, AppHookConfigTranslatableManage
             return super(GenericDateTaggedManager, self).get_queryset(*args, **kwargs)
         except AttributeError:  # pragma: no cover
             return super(GenericDateTaggedManager, self).get_query_set(*args, **kwargs)
+
     if django.VERSION < (1, 8):
         get_query_set = get_queryset
 
